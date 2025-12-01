@@ -1,124 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: "Palatino Linotype", "Palatino", serif;
-    color: #2A2A2A;
-    background-color: #FAFAFA;
-    line-height: 1.6;
-}
-
-header {
-    background-color: #FAFAFA;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 50;
-}
-
-.navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 64px;
-}
-
-.navbar-logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-.logo-text {
-    color: #515151;
-}
-
-.navbar-menu {
-    display: flex;
-    gap: 32px;
-    align-items: center;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: #515151;
-    font-weight: 500;
-    transition: color 0.5s ease;
-}
-
-.nav-link:hover {
-    color: #8C1F28;
-}
-
-.navbar-buttons {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.btn {
-    background: none;
-    border: 1px solid #515151;
-    cursor: pointer;
-    border-radius: 30px;
-    padding: 10px 20px;
-}
-
-.btn-white {
-    background-color: #E5E5E5;
-    transition: background-color 0.7s ease;
-    transition: border 0.5s ease;
-}
-
-.btn-white:hover {
-    background-color: #FAFAFA;
-    border: 1px solid #E5E5E5;
-}
-
-.btn-red {
-    background-color: #5F141A;
-    border: 1px solid #5F141A;
-    color: white;
-    transition:
-        background-color 0.5s ease-in,
-        color 0.5s ease,
-        border 0.5s ease;
-}
-
-.btn-red:hover {
-    background-color: transparent;
-    color: #8C1F28;
-    border: 1px solid #8C1F28;
-}
-
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 6px;
-}
-
-.hamburger span {
-    width: 24px;
-    height: 3px;
-    background-color: var(--dark-gray);
-    transition: all 0.3s ease;
-}
-
-/*Hero Section*/
-
+/* HERO */
 .hero {
     position: relative;
     height: calc(100vh - 64px);
@@ -178,9 +58,7 @@ header {
     padding: 15px 40px;
 }
 
-
-/* Search Bar Section */
-
+/* SEARCH BAR */
 .search-bar-section {
     position: relative;
     margin-top: -100px;
@@ -234,7 +112,6 @@ header {
     width: 20px;
     height: 20px;
     margin-right: 12px;
-    flex-shrink: 0;
 }
 
 .form-group input,
@@ -244,8 +121,6 @@ header {
     font-size: 14px;
     color: #2A2A2A;
     background: none;
-    display: flex;
-    align-items: center;
 }
 
 .form-group input::placeholder {
@@ -263,9 +138,7 @@ header {
     padding: 15px;
 }
 
-
 .btn-search img {
-    color: white;
     width: 20px;
     height: 20px;
 }

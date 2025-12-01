@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/global.css">
     <link rel="stylesheet" href="./css/login.css">
-    <title>Sign in</title>
+    <title>Sign up</title>
 </head>
 
 <body>
@@ -47,19 +47,25 @@
 
     <div class="container">
         <div class="signin-box">
-            <h2>Sign In</h2>
+            <h2>Sign up</h2>
 
             <form>
+                <label>Username</label>
+                <input type="text" placeholder="Enter your username">
+
                 <label>Email Address</label>
                 <input type="email" placeholder="Enter your email" required>
 
                 <label>Password</label>
                 <input type="password" placeholder="Enter your password" required>
 
-                <button type="submit" class="btn signin-btn" onclick="window.location.href='Home.html'">Sign In</button>
+                <label>Confirm Password</label>
+                <input type="password" placeholder="Confirm your password" required>
+
+                <button type="submit" class="signin-btn" onclick="window.location.href='Home.html'">Sign up</button>
 
                 <p class="signup-text">
-                    Don't have an account? <a href="#" onclick="window.location.href='Sign-up.html'">Create one</a>
+                    Already have an account? <a href="#" onclick="window.location.href='Sign-in.html'">Sign in</a>
                 </p>
             </form>
         </div>
