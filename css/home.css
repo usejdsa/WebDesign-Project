@@ -142,3 +142,265 @@
     width: 20px;
     height: 20px;
 }
+
+/* AMENITIES */
+
+.amenities {
+    padding: 80px 0;
+    background-color: #FAFAFA;
+}
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.amenity-card {
+    text-align: center;
+    padding: 32px 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background-color: #f0f0f0;
+}
+
+.amenity-card:hover {
+    background-color: #FAFAFA;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.amenity-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 16px;
+    background-color: rgba(95, 20, 26, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.amenity-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.amenity-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2A2A2A;
+    margin-bottom: 12px;
+}
+
+.amenity-card p {
+    color: #515151;
+    font-size: 14px;
+}
+
+/* FEATURED ROOMS*/
+.featured-rooms {
+    padding: 80px 0;
+    background-color: #f0f0f0;
+}
+
+.rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    margin-top: 60px;
+}
+
+.room-card {
+    background-color: #FAFAFA;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.room-card:hover {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+}
+
+.room-image {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.room-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.room-card:hover .room-image img {
+    transform: scale(1.08);
+}
+
+.room-rating {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: #FAFAFA;
+    padding: 8px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.room-rating .star {
+    color: #DAA520;
+}
+
+.room-content {
+    padding: 24px;
+}
+
+.room-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2A2A2A;
+    margin-bottom: 8px;
+}
+
+.room-content>p {
+    color: #515151;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.room-specs {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #E5E5E5;
+    font-size: 14px;
+    color: #515151;
+}
+
+.room-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.room-price .price {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2A2A2A;
+}
+
+.room-price .period {
+    color: #515151;
+}
+
+/* TESTIMONIALS */
+
+.testimonials {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f5f3f0 0%, #fafafa 100%);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin-top: 60px;
+}
+
+.testimonial-card {
+    background-color: #FAFAFA;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stars {
+    color: #DAA520;
+    margin-bottom: 16px;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.testimonial-text {
+    color: #515151;
+    margin-bottom: 20px;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.testimonial-author {
+    font-weight: 600;
+    color: #2A2A2A;
+}
+
+.testimonial-role {
+    font-size: 12px;
+    color: #515151;
+}
+
+/* NEWSLETTER */
+.newsletter {
+    padding: 80px 0;
+    background-color: #2A2A2A;
+    color: #f0f0f0;
+    text-align: center;
+}
+
+.newsletter h2 {
+    font-size: 42px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.newsletter p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 12px;
+    max-width: 500px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.newsletter-form input {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+
+.newsletter-form button {
+    border-radius: 4px;
+}
