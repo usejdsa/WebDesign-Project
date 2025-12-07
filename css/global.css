@@ -82,6 +82,7 @@ header {
 .btn-white {
     background-color: #E5E5E5;
     transition: background-color 0.7s ease, border 0.5s ease;
+    color: #515151;
 }
 
 .btn-white:hover {
@@ -106,17 +107,14 @@ header {
 /* HAMBURGER */
 .hamburger {
     display: none;
-    flex-direction: column;
     cursor: pointer;
-    gap: 6px;
 }
 
-.hamburger span {
-    width: 24px;
-    height: 3px;
-    background-color: var(--dark-gray);
-    transition: all 0.3s ease;
+.hamburger img {
+    width: 28px;
+    height: 28px;
 }
+
 
 /* GLOBAL SECTIONS */
 .section-container {
@@ -242,4 +240,61 @@ footer {
     gap: 20px;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.6);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* RESPONSIVE */
+/* res. header */
+
+@media (max-width: 768px) {
+
+    .navbar-menu {
+        position: absolute;
+        top: 64px;
+        right: 20px;
+        left: 20px;
+        background-color: #FAFAFA;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        gap: 20px;
+        display: none;
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .account-buttons {
+        display: none;
+    }
 }
