@@ -1,0 +1,112 @@
+.about-hero {
+    height: 400px;
+    background: url("https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1920")
+        center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 64px;
+    position: relative;
+}
+
+.about-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+
+.about-hero h1 {
+    position: relative;
+    color: white;
+    font-size: 48px;
+    font-weight: 300;
+}
+
+
+.about-content {
+    max-width: 1100px;
+    margin: auto;
+    padding: 80px 20px;
+}
+
+/* SECTION */
+.about-section {
+    margin-bottom: 80px;
+}
+
+.section-hero {
+    height: 220px;
+    background: url("https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg")
+        center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+}
+
+.section-hero h2 {
+    position: relative;
+    color: white;
+    font-size: 36px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.about-section > h2 {
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+}
+
+.about-section p {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.timeline-item {
+    padding-left: 32px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 18px;
+    height: 18px;
+    background: #5F141A;
+    border-radius: 50%;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.value-card {
+    background: var(--bg-light);
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.value-icon {
+    font-size: 40px;
+}
