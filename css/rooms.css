@@ -1,0 +1,9 @@
+.button-container {
+    padding: 3vw;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-container button {
+    padding: 1vw 3vw;
+}

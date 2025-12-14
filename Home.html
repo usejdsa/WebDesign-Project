@@ -21,7 +21,7 @@
             </a>
             <nav class="navbar">
                 <div class="navbar-menu" id="navbarMenu">
-                    <a href="" class="nav-link">Rooms & Suites</a>
+                    <a href="Rooms.html" class="nav-link">Rooms & Suites</a>
                     <a href="" class="nav-link">Gallery</a>
                     <a href="About.html" class="nav-link">About</a>
                     <a href="" class="nav-link">Contact</a>
@@ -42,8 +42,7 @@
     <main>
         <!-- HERO -->
         <section class="hero" id="home">
-            <img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1920"
-                alt="hero-background" class="hero-image">
+            <img src="./assets/images/hero-background.webp" alt="hero-background" class="hero-image">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>Experience Luxury Redefined</h1>
@@ -178,8 +177,7 @@
 
                     <div class="room-card">
                         <div class="room-image">
-                            <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg"
-                                alt="Deluxe Room">
+                            <img src="./assets/images/room-deluxe.jpeg" alt="Deluxe Room">
                             <div class="room-rating">
                                 <span class="star">★</span>
                                 <span>4.8</span>
@@ -197,15 +195,14 @@
                                     <span class="price">$199</span>
                                     <span class="period">/night</span>
                                 </div>
-                                <button class="btn btn-red">Book Now</button>
+                                <button class="btn btn-red" onclick="openModal('Deluxe room', '$199')">Book Now</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="room-card">
                         <div class="room-image">
-                            <img src="https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg"
-                                alt="Executive Suite">
+                            <img src="./assets/images/suite-executive.jpeg" alt="Executive Suite">
                             <div class="room-rating">
                                 <span class="star">★</span>
                                 <span>4.9</span>
@@ -223,15 +220,15 @@
                                     <span class="price">$349</span>
                                     <span class="period">/night</span>
                                 </div>
-                                <button class="btn btn-red">Book Now</button>
+                                <button class="btn btn-red" onclick="openModal('Executive Suite', '$349')">Book
+                                    Now</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="room-card">
                         <div class="room-image">
-                            <img src="https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg"
-                                alt="Presidential Suite">
+                            <img src="./assets/images/suite-presidential.jpeg" alt="Presidential Suite">
                             <div class="room-rating">
                                 <span class="star">★</span>
                                 <span>5.0</span>
@@ -249,7 +246,8 @@
                                     <span class="price">$599</span>
                                     <span class="period">/night</span>
                                 </div>
-                                <button class="btn btn-red">Book Now</button>
+                                <button class="btn btn-red" onclick="openModal('Presidential Suite','$599')">Book
+                                    Now</button>
                             </div>
                         </div>
                     </div>
@@ -307,6 +305,40 @@
                 </form>
             </div>
         </section>
+
+        <!-- ROOM BOOKING POPUP -->
+        <div id="bookModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3 id="modalRoomName">Book Your Room</h3>
+                <form onsubmit="submitBooking(event)">
+
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+
+                    <label for="nights">Number of Nights:</label>
+                    <input type="number" id="nights" name="nights" placeholder="Enter number of nights" min="1"
+                        required>
+
+
+                    <label for="guests">Number of Guests:</label>
+                    <select name="guests" id="guests" required>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6">6 Guests</option>
+                        <option value="7">7 Guests</option>
+                    </select>
+
+                    <label for="guests">Check-in date:</label>
+
+                    <input type="date" name="date" required>
+                    <button type="submit" class="btn btn-red">Book</button>
+                </form>
+            </div>
+        </div>
 
     </main>
 
