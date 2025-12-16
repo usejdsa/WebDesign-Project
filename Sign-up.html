@@ -22,9 +22,8 @@
             <nav class="navbar">
                 <div class="navbar-menu" id="navbarMenu">
                     <a href="Rooms.html" class="nav-link">Rooms & Suites</a>
-                    <a href="" class="nav-link">Gallery</a>
-                    <a href="" class="nav-link">About</a>
-                    <a href="" class="nav-link">Contact</a>
+                    <a href="About.html" class="nav-link">About</a>
+                    <a href="Contact.html" class="nav-link">Contact</a>
                 </div>
 
                 <div class="hamburger" id="hamburger">
@@ -44,20 +43,20 @@
         <div class="signin-box">
             <h2>Sign up</h2>
 
-            <form>
+            <form id="signup-form">
                 <label>Username</label>
-                <input type="text" placeholder="Enter your username">
+                <input type="text" id="username" placeholder="Enter your username">
 
                 <label>Email Address</label>
-                <input type="email" placeholder="Enter your email" required>
+                <input type="email" id="email" placeholder="Enter your email" required>
 
                 <label>Password</label>
-                <input type="password" placeholder="Enter your password" required>
+                <input type="password" id="password" placeholder="Enter your password" required>
 
                 <label>Confirm Password</label>
-                <input type="password" placeholder="Confirm your password" required>
+                <input type="password" id="confirm-password" placeholder="Confirm your password" required>
 
-                <button type="submit" class="signin-btn" onclick="window.location.href='Home.html'">Sign up</button>
+                <button type="submit" class="signin-btn signup-btn">Sign up</button>
 
                 <p class="signup-text">
                     Already have an account? <a href="#" onclick="window.location.href='Sign-in.html'">Sign in</a>
@@ -67,6 +66,8 @@
     </div>
 
     <script src="./js/script.js"></script>
+    <script src="./js/loginValidation.js"></script>
+
 
 </body>
 
