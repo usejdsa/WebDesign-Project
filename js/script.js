@@ -47,7 +47,7 @@ const rooms = [
         size: "320 sq ft",
         price: "$159",
         rating: "4.6",
-        img: "../assets/images/superior-room.avif"
+        img: "./assets/images/room-superior.jpg"
     },
     {
         name: "Family Suite",
@@ -56,7 +56,7 @@ const rooms = [
         size: "750 sq ft",
         price: "$279",
         rating: "4.7",
-        img: "../assets/images/family-suite.avif"
+        img: "./assets/images/suite-family.jpg"
     },
     {
         name: "Junior Suite",
@@ -65,7 +65,7 @@ const rooms = [
         size: "480 sq ft",
         price: "$229",
         rating: "4.5",
-        img: "../assets/images/junior-suite.avif"
+        img: "./assets/images/suite-junior.jpg"
     },
     {
         name: "Ocean View Room",
@@ -74,7 +74,7 @@ const rooms = [
         size: "360 sq ft",
         price: "$249",
         rating: "4.8",
-        img: "../assets/images/ocean-view-room.avif"
+        img: "./assets/images/room-oceanView.jpg"
     },
     {
         name: "Economy Room",
@@ -83,7 +83,7 @@ const rooms = [
         size: "260 sq ft",
         price: "$129",
         rating: "4.3",
-        img: "../assets/images/economy-room.avif"
+        img: "./assets/images/room-economy.jpg"
     }
 ];
 

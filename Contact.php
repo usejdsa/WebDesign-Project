@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE php>
 <html lang="en">
 
 <head>
@@ -13,7 +13,7 @@
     <header>
 
         <div class="navbar-container">
-            <a href="#" class="navbar-logo" onclick="window.location.href='Home.html'">
+            <a href="#" class="navbar-logo" onclick="window.location.href='Home.php'">
                 <figure>
                     <img src="./assets/icons/hotel_logo.svg" alt="hotel logo" width="40px;">
                 </figure>
@@ -21,9 +21,9 @@
             </a>
             <nav class="navbar">
                 <div class="navbar-menu" id="navbarMenu">
-                    <a href="Rooms.html" class="nav-link">Rooms & Suites</a>
-                    <a href="About.html" class="nav-link">About</a>
-                    <a href="Contact.html" class="nav-link">Contact</a>
+                    <a href="Rooms.php" class="nav-link">Rooms & Suites</a>
+                    <a href="About.php" class="nav-link">About</a>
+                    <a href="Contact.php" class="nav-link">Contact</a>
                 </div>
 
                 <div class="hamburger" id="hamburger">
@@ -32,8 +32,8 @@
             </nav>
 
             <div class="account-buttons">
-                <button class="btn btn-white" onclick="window.location.href='Sign-in.html'">Sign In</button>
-                <button class="btn btn-red" onclick="window.location.href='Sign-up.html'">Book Now</button>
+                <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
+                <button class="btn btn-red" onclick="window.location.href='Sign-up.php'">Book Now</button>
             </div>
         </div>
     </header>
