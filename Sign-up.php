@@ -1,4 +1,4 @@
-<!DOCTYPE php>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -44,17 +44,25 @@
             <h2>Sign up</h2>
 
             <form id="signup-form">
+                <label>Account Type</label>
+
+                <div class="role-btn-container">
+                    <button type="button" class="btn btn-white role-btn" data-role="user">User</button>
+                    <button type="button" class="btn btn-white role-btn" data-role="admin">Admin</button>
+                </div>
+                <input type="hidden" name="role" id="selected-role" value="user">
+
                 <label>Username</label>
-                <input type="text" id="username" placeholder="Enter your username">
+                <input type="text" name="username" id="username" placeholder="Enter your username">
 
                 <label>Email Address</label>
-                <input type="email" id="email" placeholder="Enter your email" required>
+                <input type="email" name="email" id="email" placeholder="Enter your email" required>
 
                 <label>Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
+                <input type="password" name="password" id="password" placeholder="Enter your password" required>
 
                 <label>Confirm Password</label>
-                <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                <input type="password" name="confirm_password" id="confirm-password" placeholder="Confirm your password" required>
 
                 <button type="submit" class="signin-btn signup-btn">Sign up</button>
 

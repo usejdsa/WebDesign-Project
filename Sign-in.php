@@ -1,4 +1,4 @@
-<!DOCTYPE php>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,10 +45,10 @@
 
             <form id="signin-form">
                 <label>Email Address</label>
-                <input type="email" placeholder="Enter your email" required>
+                <input type="email" name="email" placeholder="Enter your email" required>
 
                 <label>Password</label>
-                <input type="password" placeholder="Enter your password" required>
+                <input type="password" name="password" placeholder="Enter your password" required>
 
                 <button type="submit" class="btn signin-btn">Sign In</button>
 
