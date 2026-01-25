@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['logged_in_user'])) {
+    header('Location: Sign-in.php');
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,8 +42,13 @@
             </nav>
 
             <div class="account-buttons">
-                <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
-                <button class="btn btn-red" onclick="window.location.href='Sign-up.php'">Book Now</button>
+                <?php if (isset($_SESSION['logged_in_user'])): ?>
+                    <span style="margin-right:10px;">Signed in as <strong><?php echo $_SESSION['logged_in_user']['username']; ?></strong></span>
+                    <button class="btn btn-white" onclick="window.location.href='Logout.php'">Logout</button>
+                <?php else: ?>
+                    <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
+                    <button class="btn btn-red" onclick="window.location.href='Sign-up.php'">Book Now</button>
+                <?php endif; ?>
             </div>
         </div>
     </header>

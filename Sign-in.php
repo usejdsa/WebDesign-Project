@@ -1,10 +1,7 @@
 <?php
+session_start();
 
-$users = [
-    ['username' => 'Usejd', 'email' => 'usejd@test.com', 'password' => 'userusejd1', 'role' => 'user'],
-    ['username' => 'Shpat', 'email' => 'shpat@test.com', 'password' => 'usershpat1', 'role' => 'user'],
-    ['username' => 'admin', 'email' => 'admin@test.com', 'password' => 'admin123', 'role' => 'admin']
-];
+$users = $_SESSION['users'] ?? [];
 
 $error = '';
 
@@ -12,26 +9,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    $found = false;
+    $loggedInUser = null;
 
     foreach ($users as $user) {
         if ($user['email'] === $email && $user['password'] === $password) {
-            $found = true;
+            $loggedInUser = $user;
             break;
         }
     }
 
-    if ($found) {
+    if ($loggedInUser) {
+        $_SESSION['logged_in_user'] = [
+            'email' => $loggedInUser['email'],
+            'username' => $loggedInUser['username'],
+            'role' => $loggedInUser['role']
+        ];
+
         header("Location: Home.php");
         exit;
     } else {
         $error = "Invalid email or password!";
     }
 }
-
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,8 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </nav>
 
             <div class="account-buttons">
-                <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
-                <button class="btn btn-red" onclick="window.location.href='Sign-up.php'">Book Now</button>
+                <?php if (isset($_SESSION['logged_in_user'])): ?>
+                    <span style="margin-right:10px;">Signed in as <strong><?php echo $_SESSION['logged_in_user']['username']; ?></strong></span>
+                    <button class="btn btn-white" onclick="window.location.href='Logout.php'">Logout</button>
+                <?php else: ?>
+                    <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
+                    <button class="btn btn-red" onclick="window.location.href='Sign-up.php'">Book Now</button>
+                <?php endif; ?>
             </div>
         </div>
     </header>
@@ -78,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="signin-box">
             <h2>Sign In</h2>
 
-            <form id="signin-form" metod="POST" action="">
+            <form id="signin-form" method="POST" action="">
                 <label>Email Address</label>
                 <input type="email" name="email" placeholder="Enter your email" required>
 

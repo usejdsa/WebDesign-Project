@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['logged_in_user'])){
+    header('Location: Sign-in.php');
+    exit;
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
