@@ -1,3 +1,54 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['users'])) {
+    $_SESSION['users'] = [
+        ['username' => 'Usejd', 'email' => 'usejd@test.com', 'password' => 'userusejd1', 'role' => 'user'],
+        ['username' => 'Shpat', 'email' => 'shpat@test.com', 'password' => 'usershpat1', 'role' => 'user'],
+        ['username' => 'admin', 'email' => 'admin@test.com', 'password' => 'admin123', 'role' => 'admin']
+    ];
+}
+
+$users = &$_SESSION['users'];
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?? '';
+    $email    = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $role     = $_POST['role'] ?? 'user';
+
+    if ($username && $email && $password) {
+
+        $duplicate = false;
+        foreach ($users as $u) {
+            if ($u['email'] === $email || $u['username'] === $username) {
+                $duplicate = true;
+                break;
+            }
+        }
+
+        if ($duplicate) {
+            $error = "This email or username is already registered!";
+        } else {
+            $users[] = [
+                'username' => $username,
+                'email' => $email,
+                'password' => $password,
+                'role' => $role
+            ];
+
+            header("Location: Sign-in.php");
+            exit;
+        }
+
+    } else {
+        $error = "Please fill in all fields.";
+    }}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,8 +83,13 @@
             </nav>
 
             <div class="account-buttons">
-                <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
-                <button class="btn btn-red" onclick="window.location.href='Sign-up.php'">Book Now</button>
+                <?php if (isset($_SESSION['logged_in_user'])): ?>
+                    <span style="margin-right:10px;">Signed in as <strong><?php echo $_SESSION['logged_in_user']['username']; ?></strong></span>
+                    <button class="btn btn-white" onclick="window.location.href='Logout.php'">Logout</button>
+                <?php else: ?>
+                    <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
+                    <button class="btn btn-red" onclick="window.location.href='Sign-up.php'">Book Now</button>
+                <?php endif; ?>
             </div>
         </div>
     </header>
@@ -43,7 +99,7 @@
         <div class="signin-box">
             <h2>Sign up</h2>
 
-            <form id="signup-form">
+            <form id="signup-form" method="POST" action="">
                 <label>Account Type</label>
 
                 <div class="role-btn-container">
@@ -70,6 +126,10 @@
                     Already have an account? <a href="#" onclick="window.location.href='Sign-in.php'">Sign in</a>
                 </p>
             </form>
+            <?php if ($error): ?>
+                <p style="color:red;"><?php echo $error; ?></p>
+            <?php endif; ?>
+
         </div>
     </div>
 

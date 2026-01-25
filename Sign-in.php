@@ -1,3 +1,38 @@
+<?php
+
+$users = [
+    ['username' => 'Usejd', 'email' => 'usejd@test.com', 'password' => 'userusejd1', 'role' => 'user'],
+    ['username' => 'Shpat', 'email' => 'shpat@test.com', 'password' => 'usershpat1', 'role' => 'user'],
+    ['username' => 'admin', 'email' => 'admin@test.com', 'password' => 'admin123', 'role' => 'admin']
+];
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    $found = false;
+
+    foreach ($users as $user) {
+        if ($user['email'] === $email && $user['password'] === $password) {
+            $found = true;
+            break;
+        }
+    }
+
+    if ($found) {
+        header("Location: Home.php");
+        exit;
+    } else {
+        $error = "Invalid email or password!";
+    }
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +78,7 @@
         <div class="signin-box">
             <h2>Sign In</h2>
 
-            <form id="signin-form">
+            <form id="signin-form" metod="POST" action="">
                 <label>Email Address</label>
                 <input type="email" name="email" placeholder="Enter your email" required>
 
@@ -56,6 +91,12 @@
                     Don't have an account? <a href="#" onclick="window.location.href='Sign-up.php'">Create one</a>
                 </p>
             </form>
+            <?php
+                if ($error) {
+                    echo "<p style='color:red;'>$error</p>";
+                }
+            ?>
+
         </div>
     </div>
 

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const passwordInput = signInForm.querySelector("input[type='password']");
 
         signInForm.addEventListener("submit", function (e) {
-            e.preventDefault();
+            // e.preventDefault();
 
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!passwordRegex.test(password)) { alert("Fjalëkalimi duhet të ketë 6+ karaktere dhe shkronja + numra"); passwordInput.focus(); return; }
 
             alert("Hyrja e suksesshme!");
-            window.location.href = "Home.html";
+            // window.location.href = "Home.html";
         });
     }
 
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const confirmPasswordInput = signUpForm.querySelector("#confirm-password");
 
         signUpForm.addEventListener("submit", function (e) {
-            e.preventDefault();
+            // e.preventDefault();
 
             const username = usernameInput.value.trim();
             const email = emailInput.value.trim();
@@ -50,7 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (password !== confirmPassword) { alert("Fjalëkalimet nuk përputhen"); confirmPasswordInput.focus(); return; }
 
             alert("Regjistrimi u krye me sukses!");
-            window.location.href = "Home.html";
+            // window.location.href = "Home.html";
+        
         });
     }
 
