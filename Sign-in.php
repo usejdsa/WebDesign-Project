@@ -36,8 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
         }
 
-        header("Location: Home.php");
-        exit;
+        if ($loggedInUser['role'] === 'admin') {
+    header("Location: AdminDashboard.php");
+} else {
+    header("Location: Home.php");
+}
+exit;
     } else {
         $error = "Invalid email or password!";
     }
