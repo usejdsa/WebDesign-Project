@@ -81,7 +81,6 @@ input:focus {
 }
 
 /* ACCOUNT RADIO BUTTONS */
-
 .role-btn-container{
     display: flex;
     gap: 12px; 
@@ -92,4 +91,22 @@ input:focus {
     width: 100%;
 }
 
+/* REMEMBER ME CHECKBOX */
+.remember-checkbox{
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
 
+.remember-checkbox input{
+    width: auto;
+    height: auto;
+    margin: 0;
+}
+
+.remember-checkbox label{
+    margin: 0;
+    flex-shrink: 0;
+}

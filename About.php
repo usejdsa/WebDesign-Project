@@ -102,22 +102,22 @@ if(!isset($_SESSION['logged_in_user'])){
                     <h2>Our Values</h2>
                     <div class="values-grid">
                         <div class="value-card">
-                            <div class="value-icon">✨</div>
+                            <img src="./assets/icons/excellence-award.svg" alt="excellence icon" width="54px" class="value-icon" />
                             <h3>Excellence</h3>
                             <p>We strive for perfection in every aspect of our service and facilities.</p>
                         </div>
                         <div class="value-card">
-                            <div class="value-icon">❤️</div>
+                            <img src="./assets/icons/hospitality-heart.svg" alt="hospitality icon" width="54px" class="value-icon" />
                             <h3>Hospitality</h3>
                             <p>Genuine care and attention to every guest's needs and preferences.</p>
                         </div>
                         <div class="value-card">
-                            <div class="value-icon">🌍</div>
+                            <img src="./assets/icons/sustainability-leaf.svg" alt="sustainability icon" width="54px" class="value-icon" />
                             <h3>Sustainability</h3>
                             <p>Committed to environmental responsibility and sustainable practices.</p>
                         </div>
                         <div class="value-card">
-                            <div class="value-icon">🤝</div>
+                            <img src="./assets/icons/community-group.svg" alt="community icon" width="54px" class="value-icon" />
                             <h3>Community</h3>
                             <p>Dedicated to supporting and enriching the local community.</p>
                         </div>

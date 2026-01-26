@@ -109,7 +109,7 @@ if (!isset($_SESSION['logged_in_user'])) {
                         </div>
                     </div>
 
-                    <button class="btn btn-red btn-search ">
+                    <button onclick="location.href='Rooms.php'" class="btn btn-red btn-search ">
                         <img src="./assets/icons/search.svg" alt="search-icon">
                         <span>Search Available Rooms</span>
                     </button>

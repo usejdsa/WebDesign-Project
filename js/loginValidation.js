@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (password === "") { alert("Shkruani fjalëkalimin"); passwordInput.focus(); return; }
             if (!passwordRegex.test(password)) { alert("Fjalëkalimi duhet të ketë 6+ karaktere dhe shkronja + numra"); passwordInput.focus(); return; }
 
-            alert("Hyrja e suksesshme!");
+            // alert("Hyrja e suksesshme!");
             // window.location.href = "Home.html";
         });
     }
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!passwordRegex.test(password)) { alert("Fjalëkalimi duhet të ketë 6+ karaktere dhe shkronja + numra"); passwordInput.focus(); return; }
             if (password !== confirmPassword) { alert("Fjalëkalimet nuk përputhen"); confirmPasswordInput.focus(); return; }
 
-            alert("Regjistrimi u krye me sukses!");
+            // alert("Regjistrimi u krye me sukses!");
             // window.location.href = "Home.html";
         
         });

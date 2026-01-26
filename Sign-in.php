@@ -1,9 +1,11 @@
 <?php
-session_start();
-
-$users = $_SESSION['users'] ?? [];
+require 'users_temp.php';
 
 $error = '';
+
+if (!isset($_SESSION['logged_in_user']) && isset($_COOKIE['remember_me_user'])) {
+    $_SESSION['logged_in_user'] = json_decode($_COOKIE['remember_me_user'], true);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
@@ -24,6 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'username' => $loggedInUser['username'],
             'role' => $loggedInUser['role']
         ];
+
+        if (isset($_POST['remember_me'])) {
+        setcookie(
+            'remember_me_user',
+            json_encode($_SESSION['logged_in_user']),
+            time() + (7 * 24 * 60 * 60),
+            '/'
+        );
+        }
 
         header("Location: Home.php");
         exit;
@@ -91,6 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label>Password</label>
                 <input type="password" name="password" placeholder="Enter your password" required>
 
+                <div class="remember-checkbox">
+                    <input type="checkbox" name="remember_me" id="remember_me">
+                    <label for="remember_me">Remember Me</label>
+                </div>
+                
                 <button type="submit" class="btn signin-btn">Sign In</button>
 
                 <p class="signup-text">
