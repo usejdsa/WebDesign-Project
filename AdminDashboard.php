@@ -11,12 +11,23 @@ if ($_SESSION['logged_in_user']['role'] !== 'admin') {
     exit;
 }
 
-require "users_temp.php";
+include_once 'database/Database.php';
+include_once 'database/User.php';
+
+$db = new Database();
+$conn = $db->getConnection();
+
+$stmt = $conn->prepare("SELECT username, email, role FROM user");
+$stmt->execute();
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $totalUsers = count($users);
 $totalAdmins = count(array_filter($users, fn($u) => $u['role'] === 'admin'));
 $totalRegular = count(array_filter($users, fn($u) => $u['role'] === 'user'));
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

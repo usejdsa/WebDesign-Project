@@ -1,7 +1,9 @@
 <?php
-require 'db.php';
 session_start();
 $error = '';
+
+include_once 'database/Database.php';
+include_once 'database/User.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
@@ -13,16 +15,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password !== $confirm) {
         $error = "Passwords do not match!";
     } elseif ($username && $email && $password) {
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->execute([$email]);
+
+        $db = new Database();
+        $conn = $db->getConnection();
+        $user = new User($conn);
+
+        $stmt = $conn->prepare("SELECT id FROM user WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
         if ($stmt->fetch()) {
             $error = "Email already registered!";
         } else {
-            $hashed = password_hash($password, PASSWORD_DEFAULT);
-            $insert = $pdo->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
-            $insert->execute([$username, $email, $hashed, $role]);
-            header("Location: Sign-in.php");
-            exit;
+            if ($user->register($role, $username, $email, $password)) {
+                header("Location: Sign-in.php");
+                exit;
+            } else {
+                $error = "Error registering user!";
+            }
         }
     } else {
         $error = "Please fill all fields!";
@@ -41,27 +51,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <header>
-    <div class="navbar-container">
-        <a href="Home.php" class="navbar-logo">
-            <figure>
-                <img src="./assets/icons/hotel_logo.svg" alt="hotel logo" width="40px;">
-            </figure>
-            <h3 class="logo-text">Starline Hotel</h3>
-        </a>
-        <nav class="navbar">
-            <div class="navbar-menu">
-                <a href="Rooms.php" class="nav-link">Rooms & Suites</a>
-                <a href="About.php" class="nav-link">About</a>
-                <a href="Contact.php" class="nav-link">Contact</a>
+    <header class="auth-header">
+
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo" onclick="window.location.href='Home.php'">
+                <figure>
+                    <img src="./assets/icons/hotel_logo.svg" alt="hotel logo" width="40px;">
+                </figure>
+                <h3 class="logo-text">Starline Hotel</h3>
+            </a>
+            <nav class="navbar">
+                <div class="navbar-menu" id="navbarMenu">
+                    <a href="Rooms.php" class="nav-link">Rooms & Suites</a>
+                    <a href="About.php" class="nav-link">About</a>
+                    <a href="Contact.php" class="nav-link">Contact</a>
+                </div>
+
+                <div class="hamburger" id="hamburger">
+                    <img src="./assets/icons/menu-hamburger.svg" alt="menu icon">
+                </div>
+            </nav>
+
+            <div class="account-buttons">
+                <?php if (isset($_SESSION['logged_in_user'])): ?>
+                    <span style="margin-right:10px;">Signed in as <strong><?php echo $_SESSION['logged_in_user']['username']; ?></strong></span>
+                    <button class="btn btn-white" onclick="window.location.href='Logout.php'">Logout</button>
+                <?php else: ?>
+                    <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
+                    <button class="btn btn-red" onclick="window.location.href='Sign-up.php'">Book Now</button>
+                <?php endif; ?>
             </div>
-        </nav>
-    </div>
-</header>
+        </div>
+    </header>
 
 <div class="container">
     <div class="signin-box">
         <h2>Sign Up</h2>
-        <form method="POST" action="">
+        <form method="POST" action="Sign-up.php">
             <label>Account Type</label>
             <div class="role-btn-container">
                 <button type="button" class="btn btn-white role-btn" data-role="user">User</button>
