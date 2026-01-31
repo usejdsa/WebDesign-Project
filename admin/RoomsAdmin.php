@@ -10,26 +10,34 @@ require_once '../database/Database.php';
 $db = new Database();
 $conn = $db->getConnection();
 
-// Merr të gjitha dhomat
 $stmt = $conn->prepare("SELECT * FROM rooms ORDER BY id DESC");
 $stmt->execute();
 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../css/global.css">
 <link rel="stylesheet" href="../css/admin-room.css"> 
 <title>Admin Panel - Rooms</title>
 </head>
 <body>
 <header>
     <h2>Admin Panel - Rooms</h2>
+    
+    <div class="seperate">
+    <a href="AdminDashboard.php">Dashboard</a> 
     <a href="../Home.php">Back to Home</a>
-    <span>Signed in as <strong><?= htmlspecialchars($_SESSION['logged_in_user']['username']) ?></strong></span>
-    <a href="../Logout.php">Logout</a>
+    </div>
+
+    <div class="seperate">
+        <span>Signed in as <strong><?= htmlspecialchars($_SESSION['logged_in_user']['username']) ?></strong></span>  | 
+        <a href="../Logout.php">Logout</a>
+    </div>
 </header>
 
 <main>
@@ -39,17 +47,19 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <textarea name="description" placeholder="Description" required></textarea>
     <input type="number" name="price_per_night" placeholder="Price per night" step="0.01" required>
     <input type="file" name="image" accept="image/*" required>
-    <label>
-        <input type="checkbox" name="is_featured" value="1"> Featured
-    </label>
-    <label>
-        Status:
-        <select name="status">
-            <option value="available">Available</option>
-            <option value="unavailable">Unavailable</option>
-        </select>
-    </label>
-    <button type="submit">Add Room</button>
+    <div class="room-status">
+        <label class="checkbox">
+             Featured<input type="checkbox" name="is_featured" value="1">
+        </label>
+        <label>
+            Status:
+            <select name="status">
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+            </select>
+        </label>
+    </div>
+    <button type="submit" class="btn btn-red">Add Room</button>
 </form>
 
 <h3>All Rooms</h3>

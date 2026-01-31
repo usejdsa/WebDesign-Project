@@ -49,6 +49,10 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a href="Rooms.php" class="nav-link">Rooms & Suites</a>
                 <a href="About.php" class="nav-link">About</a>
                 <a href="Contact.php" class="nav-link">Contact</a>
+
+                <?php if (isset($_SESSION['logged_in_user']) && $_SESSION['logged_in_user']['role'] === 'admin'): ?>
+                        <a href="admin/AdminDashboard.php" class="nav-link">Dashboard</a>
+                <?php endif; ?>
             </div>
 
             <div class="hamburger" id="hamburger">
@@ -68,46 +72,58 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <main>
 
     <!-- FEATURED ROOMS -->
-    <section class="featured-rooms" id="featured-rooms">
-        <div class="section-container">
+<section class="featured-rooms" id="featured-rooms">
+    <div class="section-container">
+        <div class="section-header">
+            <h2>Featured Rooms</h2>
+            <p>Choose from our collection of elegantly designed accommodations</p>
+        </div>
 
-            <div class="section-header">
-                <h2>Featured Rooms</h2>
-                <p>Choose from our collection of elegantly designed accommodations</p>
-            </div>
+        <div class="rooms-slider">
+            <button class="prev-btn" onclick="prevRoom()">&#8592;</button>
 
-            <div class="rooms-grid">
-
+            <div class="rooms-grid" id="roomsGrid">
                 <?php if (count($rooms) === 0): ?>
                     <p>No featured rooms available at the moment.</p>
                 <?php endif; ?>
 
                 <?php foreach ($rooms as $room): ?>
                     <div class="room-card">
-                        <img 
-                            src="./images/rooms/<?= htmlspecialchars($room['image']) ?>" 
-                            alt="<?= htmlspecialchars($room['name']) ?>">
+                        <div class="room-image">
+                            <img src="./assets/images/<?= htmlspecialchars($room['image']) ?>" 
+                                 alt="<?= htmlspecialchars($room['name']) ?>">
+                            <div class="room-rating">
+                                <span class="star">★</span>
+                            </div>
+                        </div>
 
-                        <h3><?= htmlspecialchars($room['name']) ?></h3>
+                        <div class="room-content">
+                            <h3><?= htmlspecialchars($room['name']) ?></h3>
+                            <p><?= htmlspecialchars($room['description']) ?></p>
+                            <hr>
+                            <div class="room-footer">
+                                <div class="room-price">
+                                    <span class="price">€<?= htmlspecialchars($room['price_per_night']) ?></span>
+                                    <span class="period">/night</span>
+                                </div>
+                                <button class="btn btn-red" 
+                                        onclick="openModal('<?= htmlspecialchars($room['name'], ENT_QUOTES) ?>')">
+                                    Book Now
+                                </button>
+                            </div>
+                        </div>
 
-                        <p><?= htmlspecialchars($room['description']) ?></p>
-
-                        <span class="room-price">
-                            €<?= htmlspecialchars($room['price_per_night']) ?>/night
-                        </span>
-
-                        <button 
-                            class="btn btn-red"
-                            onclick="openBookingModal('<?= htmlspecialchars($room['name'], ENT_QUOTES) ?>')">
-                            Book Now
-                        </button>
                     </div>
                 <?php endforeach; ?>
-
             </div>
 
+            <button class="next-btn" onclick="nextRoom()">&#8594;</button>
         </div>
-    </section>
+    </div>
+</section>
+
+
+
 
     <!-- NEWSLETTER -->
     <section class="newsletter">
@@ -155,14 +171,63 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </main>
 
-<footer>
-    <div class="footer-container">
-        <div class="footer-bottom">
-            <p>&copy; 2024 Starline Hotel. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
+ <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
 
+            <div class="footer-grid">
+
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <figure>
+                            <img src="assets/icons/hotel_logo.svg" alt="hotel logo">
+                        </figure>
+                        <span>Starline Hotel</span>
+                    </div>
+                    <p>Experience luxury and comfort in the heart of the city. Your perfect stay awaits.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="https://www.facebook.com/">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/">Linkedin</a></li>
+                        <li><a href="#">Contact form</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>
+                        <b>Starline Hotel</b><br>
+                        123 Luxury Boulevard<br>
+                        Downtown District<br>
+                        City, 12345<br><br>
+                        <b>Phone:</b> +1 (555) 255-7344<br>
+                        <b>Email:</b> info@starlinehotel.com
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Starline Hotel. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+<script>
+    const rooms = <?= json_encode($rooms); ?>;
+    let currentIndex = 0;
+    const visibleCards = 3;
+</script>
 <script src="./js/script.js"></script>
 </body>
 </html>

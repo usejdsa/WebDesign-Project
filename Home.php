@@ -34,6 +34,10 @@ if (!isset($_SESSION['logged_in_user'])) {
                     <a href="Rooms.php" class="nav-link">Rooms & Suites</a>
                     <a href="About.php" class="nav-link">About</a>
                     <a href="Contact.php" class="nav-link">Contact</a>
+
+                    <?php if (isset($_SESSION['logged_in_user']) && $_SESSION['logged_in_user']['role'] === 'admin'): ?>
+                        <a href="admin/AdminDashboard.php" class="nav-link">Dashboard</a>
+                    <?php endif; ?>
                 </div>
 
                 <div class="hamburger" id="hamburger">

@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $is_featured = isset($_POST['is_featured']) ? 1 : 0;
     $status = $_POST['status'];
 
-    // Upload photo
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
         $imgName = time() . '_' . basename($_FILES['image']['name']);
         $target = '../assets/images/' . $imgName;
