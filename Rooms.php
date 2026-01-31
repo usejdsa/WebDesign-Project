@@ -11,11 +11,11 @@ require_once './database/Database.php';
 $db = new Database();
 $conn = $db->getConnection();
 
+// Marrim të gjitha dhomat featured, pa e filtruar statusin
 $stmt = $conn->prepare("
-    SELECT id, name, description, price_per_night, image
+    SELECT id, name, description, price_per_night, image, status
     FROM rooms
     WHERE is_featured = 1
-    AND status = 'available'
 ");
 $stmt->execute();
 
@@ -24,7 +24,6 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +31,6 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="./css/rooms.css">
     <title>Starline Hotel</title>
 </head>
-
 <body>
 
 <header>
@@ -70,8 +68,6 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </header>
 
 <main>
-
-    <!-- FEATURED ROOMS -->
 <section class="featured-rooms" id="featured-rooms">
     <div class="section-container">
         <div class="section-header">
@@ -106,13 +102,17 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <span class="price">€<?= htmlspecialchars($room['price_per_night']) ?></span>
                                     <span class="period">/night</span>
                                 </div>
-                                <button class="btn btn-red" 
-                                        onclick="openModal('<?= htmlspecialchars($room['name'], ENT_QUOTES) ?>')">
-                                    Book Now
-                                </button>
+
+                                <?php if ($room['status'] === 'available'): ?>
+                                    <button class="btn btn-red" 
+                                            onclick="openModal('<?= htmlspecialchars($room['name'], ENT_QUOTES) ?>', <?= $room['id'] ?>)">
+                                        Book Now
+                                    </button>
+                                <?php else: ?>
+                                    <button class="btn btn-grey" disabled>Unavailable</button>
+                                <?php endif; ?>
                             </div>
                         </div>
-
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -122,106 +122,96 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </section>
 
-
-
-
-    <!-- NEWSLETTER -->
-    <section class="newsletter">
-        <div class="section-container">
-            <h2>Stay Updated</h2>
-            <p>Subscribe to our newsletter for exclusive offers and travel inspiration</p>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email address" required>
-                <button type="submit" class="btn btn-red">Subscribe</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- BOOKING MODAL -->
-    <div id="bookModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3 id="modalRoomName">Book Your Room</h3>
-
-            <form onsubmit="submitBooking(event)">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-
-                <label>Number of Nights:</label>
-                <input type="number" name="nights" min="1" required>
-
-                <label>Number of Guests:</label>
-                <select name="guests" required>
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4">4 Guests</option>
-                    <option value="5">5 Guests</option>
-                    <option value="6">6 Guests</option>
-                    <option value="7">7 Guests</option>
-                </select>
-
-                <label>Check-in Date:</label>
-                <input type="date" name="date" required>
-
-                <button type="submit" class="btn btn-red">Book</button>
-            </form>
-        </div>
+<!-- NEWSLETTER -->
+<section class="newsletter">
+    <div class="section-container">
+        <h2>Stay Updated</h2>
+        <p>Subscribe to our newsletter for exclusive offers and travel inspiration</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit" class="btn btn-red">Subscribe</button>
+        </form>
     </div>
+</section>
+
+<!-- BOOKING MODAL -->
+<div id="bookModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3 id="modalRoomName">Book Your Room</h3>
+
+        <form method="POST" action="bookRoom.php">
+            <input type="hidden" name="room_id" id="room_id">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+
+            <label>Number of Nights:</label>
+            <input type="number" name="nights" min="1" required>
+
+            <label>Number of Guests:</label>
+            <select name="guests" required>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="7">7 Guests</option>
+            </select>
+
+            <label>Check-in Date:</label>
+            <input type="date" name="date" required>
+
+            <button type="submit" class="btn btn-red">Book</button>
+        </form>
+    </div>
+</div>
 
 </main>
 
- <!-- FOOTER -->
-    <footer>
-        <div class="footer-container">
-
-            <div class="footer-grid">
-
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <figure>
-                            <img src="assets/icons/hotel_logo.svg" alt="hotel logo">
-                        </figure>
-                        <span>Starline Hotel</span>
-                    </div>
-                    <p>Experience luxury and comfort in the heart of the city. Your perfect stay awaits.</p>
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <figure>
+                        <img src="assets/icons/hotel_logo.svg" alt="hotel logo">
+                    </figure>
+                    <span>Starline Hotel</span>
                 </div>
-
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="https://www.facebook.com/">Facebook</a></li>
-                        <li><a href="https://www.instagram.com/">Instagram</a></li>
-                        <li><a href="https://www.linkedin.com/">Linkedin</a></li>
-                        <li><a href="#">Contact form</a></li>
-
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>
-                        <b>Starline Hotel</b><br>
-                        123 Luxury Boulevard<br>
-                        Downtown District<br>
-                        City, 12345<br><br>
-                        <b>Phone:</b> +1 (555) 255-7344<br>
-                        <b>Email:</b> info@starlinehotel.com
-                    </p>
-                </div>
-
+                <p>Experience luxury and comfort in the heart of the city. Your perfect stay awaits.</p>
             </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2024 Starline Hotel. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://www.facebook.com/">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/">Instagram</a></li>
+                    <li><a href="https://www.linkedin.com/">Linkedin</a></li>
+                    <li><a href="#">Contact form</a></li>
+                </ul>
             </div>
-
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>
+                    <b>Starline Hotel</b><br>
+                    123 Luxury Boulevard<br>
+                    Downtown District<br>
+                    City, 12345<br><br>
+                    <b>Phone:</b> +1 (555) 255-7344<br>
+                    <b>Email:</b> info@starlinehotel.com
+                </p>
+            </div>
         </div>
-    </footer>
 
+        <div class="footer-bottom">
+            <p>&copy; 2024 Starline Hotel. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script>
     const rooms = <?= json_encode($rooms); ?>;

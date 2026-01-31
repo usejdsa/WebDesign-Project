@@ -79,7 +79,12 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <td><?= htmlspecialchars($room['name']) ?></td>
         <td><img src="../assets/images/<?= $room['image'] ?>" width="100"></td>
         <td>€<?= $room['price_per_night'] ?></td>
-        <td><?= $room['status'] ?></td>
+        <td>
+            <?= $room['status'] ?>
+            <?php if ($room['status'] === 'unavailable'): ?>
+                | <a href="make_available.php?id=<?= $room['id'] ?>" onclick="return confirm('Make this room available?')">Make Available</a>
+            <?php endif; ?>
+        </td>
         <td><?= $room['is_featured'] ? 'Yes' : 'No' ?></td>
         <td>
             <a href="edit_room.php?id=<?= $room['id'] ?>">Edit</a> | 

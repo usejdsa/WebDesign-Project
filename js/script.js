@@ -1,4 +1,3 @@
-
 // HAMBURGER 
 const hamburger = document.getElementById("hamburger");
 const navMenu = document.getElementById("navbarMenu");
@@ -6,7 +5,6 @@ const navMenu = document.getElementById("navbarMenu");
 hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("active");
 });
-
 
 // ROOMS SLIDESHOW
 const grid = document.getElementById("roomsGrid");
@@ -36,33 +34,15 @@ function updateButtons() {
 }
 
 grid.addEventListener("scroll", updateButtons);
-
 updateButtons();
 
-
 // ROOM BOOKING FORM
-function openModal(roomName, roomPrice) {
-    document.getElementById("modalRoomName").textContent = `Booking: ${roomName}`;
+function openModal(roomName, roomId) {
+    document.getElementById("modalRoomName").textContent = `Book: ${roomName}`;
     document.getElementById("bookModal").style.display = "block";
+    document.getElementById("room_id").value = roomId;
 }
 
 function closeModal() {
     document.getElementById("bookModal").style.display = "none";
 }
-
-function submitBooking(event) {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const date = form.date.value;
-    const room = document.getElementById("modalRoomName").textContent.replace('Book: ', '');
-
-    alert(`Booking submitted!\nRoom: ${room}\nName: ${name}\nEmail: ${email}\nDate: ${date}`);
-    form.reset();
-    closeModal();
-}
-
-window.onload = renderRooms;
-
-
