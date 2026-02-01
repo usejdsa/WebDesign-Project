@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = new Database();
     $conn = $db->getConnection();
 
-    // Kontrollo nëse dhoma është ende available
     $stmt = $conn->prepare("SELECT status FROM rooms WHERE id=:id");
     $stmt->execute([':id'=>$roomId]);
     $room = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -22,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("This room is already booked!");
     }
 
-    // Shto rezervimin në bookings
     $stmt = $conn->prepare("INSERT INTO bookings (room_id, customer_name, customer_email, nights, guests, checkin_date) 
                             VALUES (:room_id, :name, :email, :nights, :guests, :date)");
     $stmt->execute([
@@ -34,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':date'=>$date
     ]);
 
-    // Bëj dhomën unavailable
     $stmt = $conn->prepare("UPDATE rooms SET status='unavailable' WHERE id=:id");
     $stmt->execute([':id'=>$roomId]);
 

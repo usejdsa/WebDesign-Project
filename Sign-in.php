@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if ($userData['role'] === 'admin') {
-                header("Location: /WebDesign-Project/WebDesign-Project/admin/AdminDashboard.php");
+                header("Location: /WebDesign-Project/admin/AdminDashboard.php");
             } else {
                 header("Location: Home.php");
             }

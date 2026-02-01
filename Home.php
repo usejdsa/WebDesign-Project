@@ -66,8 +66,8 @@ if (!isset($_SESSION['logged_in_user'])) {
                 <h1>Experience Luxury Redefined</h1>
                 <p>Discover exceptional hospitality in the heart of the city</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-red p-btn">Explore Rooms</button>
-                    <button class="btn btn-white p-btn">Special Offers</button>
+                    <button class="btn btn-red p-btn" onclick="window.location.href='Rooms.php'">Explore Rooms</button>
+                    <button class="btn btn-white p-btn"  onclick="window.location.href='Rooms.php'">Special Offers</button>
                 </div>
             </div>
         </section>
