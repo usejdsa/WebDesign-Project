@@ -1,26 +1,15 @@
 <?php
 session_start();
-if (!isset($_SESSION['logged_in_user']) || $_SESSION['logged_in_user']['role'] !== 'admin') {
+if(!isset($_SESSION['logged_in_user']) || $_SESSION['logged_in_user']['role']!=='admin'){
     header('Location: ../Sign-in.php');
     exit;
 }
-require_once '../database/Database.php';
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $db = new Database();
-    $conn = $db->getConnection();
+require_once '../database/Room.php';
 
-    $stmt = $conn->prepare("SELECT image FROM rooms WHERE id=:id");
-    $stmt->execute([':id'=>$id]);
-    $img = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($img) {
-        @unlink('../assets/images/' . $img['image']);
-    }
-
-    $stmt = $conn->prepare("DELETE FROM rooms WHERE id=:id");
-    $stmt->execute([':id'=>$id]);
+if(isset($_GET['id'])){
+    $room = new Room();
+    $room->deleteRoom($_GET['id']);
     header('Location: RoomsAdmin.php');
     exit;
 }
-?>

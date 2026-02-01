@@ -11,7 +11,6 @@ require_once './database/Database.php';
 $db = new Database();
 $conn = $db->getConnection();
 
-// Marrim të gjitha dhomat featured, pa e filtruar statusin
 $stmt = $conn->prepare("
     SELECT id, name, description, price_per_night, image, status
     FROM rooms
@@ -20,6 +19,29 @@ $stmt = $conn->prepare("
 $stmt->execute();
 
 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// FILTER FROM HOME SEARCH
+$searchDate = $_GET['date'] ?? null;
+$checkoutDate = $_GET['checkout'] ?? null;
+$guests = $_GET['guests'] ?? 1;
+$destination = $_GET['destination'] ?? null;
+
+$sql = "SELECT * FROM rooms WHERE status='available'";
+$params = [];
+
+if ($searchDate) {
+    $sql .= " AND id NOT IN (
+        SELECT room_id FROM bookings
+        WHERE checkin_date <= :date
+        AND DATE_ADD(checkin_date, INTERVAL nights DAY) > :date
+    )";
+    $params[':date'] = $searchDate;
+}
+
+$stmt = $conn->prepare($sql);
+$stmt->execute($params);
+$rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>

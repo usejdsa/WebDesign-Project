@@ -6,6 +6,9 @@ body {
 
 /* HEADER */
 header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     background-color: #5F141A;
     color: #fff;
     padding: 20px 100px;
@@ -141,23 +144,200 @@ table a:hover {
     text-decoration: underline;
 }
 
-/* ====== RESPONSIVE ====== */
-@media (max-width: 768px) {
+/* EDIT MODAL */
+/* MODAL STYLES */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 30px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    overflow-y: hidden;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 80px auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 500px;
+    max-width: 90%;
+    overflow:hidden;
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-content form input,
+.modal-content form textarea,
+.modal-content form select {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+
+
+@media (max-width: 992px) {
     header {
         flex-direction: column;
         align-items: flex-start;
+        padding: 10px 15px;
+        gap: 10px;
     }
 
-    form input[type="text"],
-    form input[type="number"],
-    form input[type="file"],
-    form select,
-    form textarea {
+    .seperate {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .account-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    header h2 {
+        font-size: 18px;
+    }
+
+    header span {
         font-size: 14px;
+    }
+
+    nav a.nav-link {
+        font-size: 14px;
+    }
+
+    main {
+        margin-top: 50px;
+    }
+
+    form input, form select, form textarea {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+
+    form button {
+        min-width: 100%;
     }
 
     table th, table td {
         font-size: 14px;
         padding: 8px 10px;
+    }
+
+    .room-status {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-content {
+        width: 90%;
+        margin: 50px auto;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .seperate, .account-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    header h2 {
+        font-size: 16px;
+    }
+
+    header span, nav a.nav-link {
+        font-size: 12px;
+    }
+
+    main {
+        padding: 15px 10px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+
+    form input, form select, form textarea {
+        font-size: 13px;
+        padding: 6px 8px;
+    }
+
+    form button {
+        font-size: 14px;
+        min-width: 100%;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 40px auto;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 5px 10px;
+        gap: 5px;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    table th, table td {
+        font-size: 11px;
+        padding: 5px 6px;
+    }
+
+    form input, form select, form textarea {
+        font-size: 12px;
+        padding: 5px 6px;
+    }
+
+    form button {
+        font-size: 13px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 30px auto;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 1200px) {
+    main {
+        padding: 30px 15px;
     }
 }

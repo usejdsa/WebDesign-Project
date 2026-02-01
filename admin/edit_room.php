@@ -15,8 +15,8 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     }
 
     $room = new Room();
-    $room->addRoom($_POST['name'], $_POST['description'], $_POST['price_per_night'], 
-                   $_POST['status'], isset($_POST['is_featured'])?1:0, $image);
+    $room->updateRoom($_POST['id'], $_POST['name'], $_POST['description'], $_POST['price_per_night'],
+                      $_POST['status'], isset($_POST['is_featured'])?1:0, $image);
 
     header('Location: RoomsAdmin.php');
     exit;

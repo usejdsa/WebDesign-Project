@@ -105,3 +105,74 @@
     color: #2A2A2A;
     font-weight: bold;
 }
+
+.bookings-table{
+    margin-top: 40px;
+}
+
+@media screen and (max-width: 1200px) {
+    .admin-stats {
+        flex-direction: column; 
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px;
+    }
+
+    .admin-sidebar a {
+        margin-right: 10px;
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
+
+    .admin-content {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .admin-table th, .admin-table td {
+        padding: 8px 10px; 
+        font-size: 0.9rem;
+    }
+
+    .admin-card {
+        flex: 1 1 100%;
+    }
+
+    .modal-content {
+        margin: 50px auto;   
+        width: 90%;          
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .admin-sidebar {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .admin-sidebar a {
+        font-size: 0.9rem;
+        padding: 6px 8px;
+    }
+
+    .admin-topbar h1 {
+        font-size: 1.2rem;
+    }
+
+    .admin-topbar p {
+        font-size: 0.9rem;
+    }
+}
+

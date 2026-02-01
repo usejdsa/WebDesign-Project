@@ -13,6 +13,11 @@ if ($_SESSION['logged_in_user']['role'] !== 'admin') {
 
 include_once '../database/Database.php';
 include_once '../database/User.php';
+include_once 'Booking.php';
+
+
+$bookingObj = new Booking();
+$bookings = $bookingObj->getAllBookings();
 
 $db = new Database();
 $conn = $db->getConnection();
@@ -94,6 +99,36 @@ $totalRegular = count(array_filter($users, fn($u) => $u['role'] === 'user'));
                         </td>
                     </tr>
                 <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="admin-card bookings-table">
+            <h3>Bookings</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Room</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Nights</th>
+                        <th>Guests</th>
+                        <th>Check-in</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($bookings as $b): ?>
+                    <tr>
+                        <td><?= $b['id'] ?></td>
+                        <td><?= htmlspecialchars($b['room_name']) ?></td>
+                        <td><?= htmlspecialchars($b['customer_name']) ?></td>
+                        <td><?= htmlspecialchars($b['customer_email']) ?></td>
+                        <td><?= $b['nights'] ?></td>
+                        <td><?= $b['guests'] ?></td>
+                        <td><?= $b['checkin_date'] ?></td>
+                    </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </section>

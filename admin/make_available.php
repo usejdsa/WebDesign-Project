@@ -12,7 +12,6 @@ if (isset($_GET['id'])) {
     $db = new Database();
     $conn = $db->getConnection();
 
-    // Bëj dhomën available
     $stmt = $conn->prepare("UPDATE rooms SET status='available' WHERE id=:id");
     $stmt->execute([':id'=>$id]);
 

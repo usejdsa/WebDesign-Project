@@ -30,6 +30,11 @@
     right: -40px;
 }
 
+.featured-rooms { 
+    padding: 80px 0; 
+    background-color: #f0f0f0; 
+} 
+
 /* ROOM CONTAINER */
 .rooms-grid {
     display: flex;

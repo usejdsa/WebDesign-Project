@@ -67,7 +67,7 @@ if (!isset($_SESSION['logged_in_user'])) {
                 <p>Discover exceptional hospitality in the heart of the city</p>
                 <div class="hero-buttons">
                     <button class="btn btn-red p-btn" onclick="window.location.href='Rooms.php'">Explore Rooms</button>
-                    <button class="btn btn-white p-btn"  onclick="window.location.href='Rooms.php'">Special Offers</button>
+                    <button class="btn btn-white p-btn" onclick="location.href='#featured-rooms'">Special Offers</button>
                 </div>
             </div>
         </section>
@@ -75,49 +75,51 @@ if (!isset($_SESSION['logged_in_user'])) {
         <!-- SEARCH BAR -->
         <section class="search-bar-section">
             <div class="search-container">
-                <div class="search-form">
-                    <div class="form-group">
-                        <label>Destination</label>
-                        <div class="input-wrapper">
-                            <img class="input-icon" src="./assets/icons/location.svg" alt="location-icon">
-                            <input type="text" placeholder="Where to?">
+                <form action="Rooms.php" method="GET" class="search-form">
+                    <div class="search-form">
+                        <div class="form-group">
+                            <label>Destination</label>
+                            <div class="input-wrapper">
+                                <img class="input-icon" src="./assets/icons/location.svg" alt="location-icon">
+                                <input type="text" placeholder="Where to?">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Check-in</label>
-                        <div class="input-wrapper">
-                            <img class="input-icon" src="./assets/icons/calendar.svg" alt="calendar-icon">
-                            <input type="date">
+                        <div class="form-group">
+                            <label>Check-in</label>
+                            <div class="input-wrapper">
+                                <img class="input-icon" src="./assets/icons/calendar.svg" alt="calendar-icon">
+                                <input type="date">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Check-out</label>
-                        <div class="input-wrapper">
-                            <img class="input-icon" src="./assets/icons/calendar.svg" alt="calendar-icon">
-                            <input type="date">
+                        <div class="form-group">
+                            <label>Check-out</label>
+                            <div class="input-wrapper">
+                                <img class="input-icon" src="./assets/icons/calendar.svg" alt="calendar-icon">
+                                <input type="date">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Guests</label>
-                        <div class="input-wrapper">
-                            <img class="input-icon" src="./assets/icons/group-of-people.svg" alt="people-icon">
-                            <select>
-                                <option>1 Guest</option>
-                                <option>2 Guests</option>
-                                <option>3 Guests</option>
-                                <option>4+ Guests</option>
-                            </select>
+                        <div class="form-group">
+                            <label>Guests</label>
+                            <div class="input-wrapper">
+                                <img class="input-icon" src="./assets/icons/group-of-people.svg" alt="people-icon">
+                                <select>
+                                    <option>1 Guest</option>
+                                    <option>2 Guests</option>
+                                    <option>3 Guests</option>
+                                    <option>4+ Guests</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <button onclick="location.href='Rooms.php'" class="btn btn-red btn-search ">
-                        <img src="./assets/icons/search.svg" alt="search-icon">
-                        <span>Search Available Rooms</span>
-                    </button>
-                </div>
+                        <button onclick="location.href='Rooms.php'" class="btn btn-red btn-search ">
+                            <img src="./assets/icons/search.svg" alt="search-icon">
+                            <span>Search Available Rooms</span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </section>
 

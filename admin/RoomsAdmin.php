@@ -87,12 +87,72 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </td>
         <td><?= $room['is_featured'] ? 'Yes' : 'No' ?></td>
         <td>
-            <a href="edit_room.php?id=<?= $room['id'] ?>">Edit</a> | 
+            <a href="javascript:void(0)" onclick='openEditModal(<?= json_encode($room) ?>)'>Edit</a> | 
             <a href="delete_room.php?id=<?= $room['id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
         </td>
+
     </tr>
     <?php endforeach; ?>
 </table>
+
+<!-- EDIT ROOM MODAL -->
+<div id="editRoomModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h3>Edit Room</h3>
+        <form id="editRoomForm" action="edit_room.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="editRoomId">
+
+            <label for="editRoomName">Room Name</label>
+            <input type="text" name="name" id="editRoomName" required>
+
+            <label for="editRoomDescription">Description</label>
+            <textarea name="description" id="editRoomDescription" required></textarea>
+
+            <label for="editRoomPrice">Price per Night</label>
+            <input type="number" name="price_per_night" id="editRoomPrice" step="0.01" required>
+
+            <label for="editRoomImage">Image (leave blank to keep current)</label>
+            <input type="file" name="image" id="editRoomImage" accept="image/*">
+
+            <label for="editRoomFeatured">
+                <input type="checkbox" name="is_featured" id="editRoomFeatured"> Featured
+            </label>
+
+            <label for="editRoomStatus">Status</label>
+            <select name="status" id="editRoomStatus">
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+            </select>
+
+            <button type="submit" class="btn btn-red">Save Changes</button>
+        </form>
+    </div>
+</div>
+
 </main>
+
+<script>
+    function openEditModal(room) {
+        document.getElementById('editRoomModal').style.display = 'block';
+
+        document.getElementById('editRoomId').value = room.id;
+        document.getElementById('editRoomName').value = room.name;
+        document.getElementById('editRoomDescription').value = room.description;
+        document.getElementById('editRoomPrice').value = room.price_per_night;
+        document.getElementById('editRoomFeatured').checked = room.is_featured == 1;
+        document.getElementById('editRoomStatus').value = room.status;
+    }
+
+    function closeEditModal() {
+        document.getElementById('editRoomModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('editRoomModal');
+        if (event.target == modal) modal.style.display = 'none';
+    }
+</script>
+
 </body>
 </html>
