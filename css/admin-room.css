@@ -1,22 +1,21 @@
-
 body {
     background-color: #f5f5f5;
     color: #2A2A2A;
 }
 
-/* HEADER */
 header {
     position: sticky;
     top: 0;
     z-index: 1000;
     background-color: #5F141A;
     color: #fff;
-    padding: 20px 100px;
+    padding: 20px 40px;
+
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 header h2 {
@@ -33,19 +32,19 @@ header span {
     font-size: 16px;
 }
 
-.seperate{
+.seperate {
     display: flex;
-    gap: 30px;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-/* ====== MAIN CONTAINER ====== */
 main {
     max-width: 1200px;
     margin: 30px auto;
     padding: 70px 20px;
 }
 
-/* ====== FORM ADD ROOM ====== */
 form {
     background-color: #FAFAFA;
     padding: 20px;
@@ -55,10 +54,6 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-form input{
-    border-image-width: 100%;
 }
 
 form h3 {
@@ -77,27 +72,26 @@ form input, form select, form textarea {
     background-color: #fff;
 }
 
-.room-status{
+.room-status {
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
 
-.checkbox{
+.checkbox {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.checkbox input{
+.checkbox input {
     margin: 0;
 }
 
-form button{
+form button {
     min-width: 400px;
 }
 
-/* ====== TABLE ====== */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -131,9 +125,6 @@ table img {
     max-width: 100px;
     height: auto;
 }
-
-
-/* ====== ACTION LINKS ====== */
 table a {
     color: #5F141A; 
     text-decoration: none;
@@ -144,8 +135,6 @@ table a:hover {
     text-decoration: underline;
 }
 
-/* EDIT MODAL */
-/* MODAL STYLES */
 .modal {
     display: none;
     position: fixed;
@@ -196,28 +185,25 @@ table a:hover {
     border-radius: 6px;
 }
 
-
-
 @media (max-width: 992px) {
     header {
         flex-direction: column;
         align-items: flex-start;
-        padding: 10px 15px;
-        gap: 10px;
-    }
-
-    .seperate {
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .account-buttons {
-        flex-direction: column;
-        gap: 5px;
+        padding: 15px 20px;
     }
 
     header h2 {
         font-size: 18px;
+    }
+
+    .seperate {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 15px;
+    }
+    .account-buttons {
+        flex-direction: column;
+        gap: 5px;
     }
 
     header span {
@@ -260,10 +246,19 @@ table a:hover {
 
 @media (max-width: 768px) {
     header {
+        align-items: center;
+        text-align: center;
+    }
+
+    .seperate {
+        justify-content: center;
         flex-direction: column;
-        align-items: flex-start;
-        padding: 8px 12px;
-        gap: 8px;
+        gap: 10px;
+    }
+
+    header a,
+    header span {
+        font-size: 14px;
     }
 
     .seperate, .account-buttons {
@@ -309,6 +304,15 @@ table a:hover {
     header {
         padding: 5px 10px;
         gap: 5px;
+    }
+
+    header h2 {
+        font-size: 16px;
+    }
+
+    header a,
+    header span {
+        font-size: 13px;
     }
 
     main {

@@ -47,7 +47,7 @@ if (!isset($_SESSION['logged_in_user'])) {
 
             <div class="account-buttons">
                 <?php if (isset($_SESSION['logged_in_user'])): ?>
-                    <span style="margin-right:10px;">Signed in as <strong><?php echo $_SESSION['logged_in_user']['username']; ?></strong></span>
+                    <span style="margin-right:10px;">Signed in as <strong><?php echo htmlspecialchars($_SESSION['logged_in_user']['username']); ?></strong></span>
                     <button class="btn btn-white" onclick="window.location.href='Logout.php'">Logout</button>
                 <?php else: ?>
                     <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
@@ -75,7 +75,6 @@ if (!isset($_SESSION['logged_in_user'])) {
         <!-- SEARCH BAR -->
         <section class="search-bar-section">
             <div class="search-container">
-                <form action="Rooms.php" method="GET" class="search-form">
                     <div class="search-form">
                         <div class="form-group">
                             <label>Destination</label>
@@ -119,7 +118,6 @@ if (!isset($_SESSION['logged_in_user'])) {
                             <span>Search Available Rooms</span>
                         </button>
                     </div>
-                </form>
             </div>
         </section>
 
@@ -215,7 +213,6 @@ if (!isset($_SESSION['logged_in_user'])) {
                                     <span class="price">$199</span>
                                     <span class="period">/night</span>
                                 </div>
-                                <button class="btn btn-red" onclick="openModal('Deluxe room', '$199')">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -240,8 +237,7 @@ if (!isset($_SESSION['logged_in_user'])) {
                                     <span class="price">$349</span>
                                     <span class="period">/night</span>
                                 </div>
-                                <button class="btn btn-red" onclick="openModal('Executive Suite', '$349')">Book
-                                    Now</button>
+                               
                             </div>
                         </div>
                     </div>
@@ -266,8 +262,7 @@ if (!isset($_SESSION['logged_in_user'])) {
                                     <span class="price">$599</span>
                                     <span class="period">/night</span>
                                 </div>
-                                <button class="btn btn-red" onclick="openModal('Presidential Suite','$599')">Book
-                                    Now</button>
+                                
                             </div>
                         </div>
                     </div>
@@ -319,10 +314,12 @@ if (!isset($_SESSION['logged_in_user'])) {
             <div class="section-container">
                 <h2>Stay Updated</h2>
                 <p>Subscribe to our newsletter for exclusive offers and travel inspiration</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address" required>
-                    <button type="submit" class=" btn btn-red">Subscribe</button>
+                <form id="newsletterForm" class="newsletter-form" method="POST" action="submitForm.php">
+                    <input type="hidden" name="type" value="newsletter">
+                    <input type="email" name="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-red">Subscribe</button>
                 </form>
+
             </div>
         </section>
 
@@ -333,7 +330,8 @@ if (!isset($_SESSION['logged_in_user'])) {
                 <h3 id="modalRoomName">Book Your Room</h3>
                 <form onsubmit="submitBooking(event)">
 
-                    <input type="text" name="name" placeholder="Your Name" required>
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
 
                     <label for="nights">Number of Nights:</label>
@@ -412,6 +410,26 @@ if (!isset($_SESSION['logged_in_user'])) {
 
         </div>
     </footer>
+
+    <script>
+        document.getElementById('newsletterForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('submitForm.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.text())
+            .then(msg => {
+                alert(msg);
+                this.reset();
+            })
+            .catch(() => alert('Something went wrong'));
+        });
+    </script>
+
 
     <script src="./js/script.js"></script>
 </body>

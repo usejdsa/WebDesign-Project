@@ -11,26 +11,18 @@ require_once './database/Database.php';
 $db = new Database();
 $conn = $db->getConnection();
 
-$stmt = $conn->prepare("
-    SELECT id, name, description, price_per_night, image, status
-    FROM rooms
-    WHERE is_featured = 1
-");
-$stmt->execute();
-
-$rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// FILTER FROM HOME SEARCH
 $searchDate = $_GET['date'] ?? null;
-$checkoutDate = $_GET['checkout'] ?? null;
-$guests = $_GET['guests'] ?? 1;
-$destination = $_GET['destination'] ?? null;
 
-$sql = "SELECT * FROM rooms WHERE status='available'";
+$sql = "
+    SELECT r.*
+    FROM rooms r
+    WHERE r.is_featured = 1
+";
+
 $params = [];
 
 if ($searchDate) {
-    $sql .= " AND id NOT IN (
+    $sql .= " AND r.id NOT IN (
         SELECT room_id FROM bookings
         WHERE checkin_date <= :date
         AND DATE_ADD(checkin_date, INTERVAL nights DAY) > :date
@@ -41,7 +33,6 @@ if ($searchDate) {
 $stmt = $conn->prepare($sql);
 $stmt->execute($params);
 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
 <!DOCTYPE html>

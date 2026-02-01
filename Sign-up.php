@@ -50,10 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Sign Up</title>
 </head>
 <body>
-<header>
-    <header class="auth-header">
-
-        <div class="navbar-container">
+<header class="auth-header">
+    <div class="navbar-container">
             <a href="#" class="navbar-logo" onclick="window.location.href='Home.php'">
                 <figure>
                     <img src="./assets/icons/hotel_logo.svg" alt="hotel logo" width="40px;">
@@ -74,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="account-buttons">
                 <?php if (isset($_SESSION['logged_in_user'])): ?>
-                    <span style="margin-right:10px;">Signed in as <strong><?php echo $_SESSION['logged_in_user']['username']; ?></strong></span>
+                    <span style="margin-right:10px;">Signed in as <strong><?php echo htmlspecialchars($_SESSION['logged_in_user']['username']); ?></strong></span>
                     <button class="btn btn-white" onclick="window.location.href='Logout.php'">Logout</button>
                 <?php else: ?>
                     <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
@@ -87,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container">
     <div class="signin-box">
         <h2>Sign Up</h2>
-        <form method="POST" action="Sign-up.php">
+        <form id="signup-form" method="POST" action="Sign-up.php">
             <label>Account Type</label>
             <div class="role-btn-container">
                 <button type="button" class="btn btn-white role-btn" data-role="user">User</button>
@@ -96,16 +94,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="hidden" name="role" id="selected-role" value="user">
 
             <label>Username</label>
-            <input type="text" name="username" placeholder="Enter your username" required>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
 
             <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your email" required>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
             <label>Password</label>
-            <input type="password" name="password" placeholder="Enter your password" required>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
             <label>Confirm Password</label>
-            <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+            <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
 
             <button type="submit" class="signin-btn signup-btn">Sign Up</button>
 
@@ -120,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script src="./js/script.js"></script>
+<script src="./js/loginValidation.js"></script>
 <script>
 const buttons = document.querySelectorAll('.role-btn');
 const hiddenInput = document.getElementById('selected-role');

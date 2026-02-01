@@ -22,6 +22,12 @@ $bookings = $bookingObj->getAllBookings();
 $db = new Database();
 $conn = $db->getConnection();
 
+// Get all submissions (newsletter + contact form)
+$stmt2 = $conn->prepare("SELECT * FROM submissions ORDER BY created_at DESC");
+$stmt2->execute();
+$submissions = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+
 $stmt = $conn->prepare("SELECT username, email, role FROM user");
 $stmt->execute();
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -132,6 +138,40 @@ $totalRegular = count(array_filter($users, fn($u) => $u['role'] === 'user'));
                 </tbody>
             </table>
         </section>
+
+       <section class="admin-card  bookings-table">
+            <h3>Form Submissions</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Submitted At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($submissions as $s): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($s['type']); ?></td>
+                            <td><?php echo $s['type'] === 'contact' ? htmlspecialchars($s['first_name']) : '-'; ?></td>
+                            <td><?php echo $s['type'] === 'contact' ? htmlspecialchars($s['last_name']) : '-'; ?></td>
+                            <td><?php echo htmlspecialchars($s['email']); ?></td>
+                            <td><?php echo $s['type'] === 'contact' ? htmlspecialchars($s['phone']) : '-'; ?></td>
+                            <td><?php echo $s['type'] === 'contact' ? htmlspecialchars($s['subject']) : '-'; ?></td>
+                            <td><?php echo $s['type'] === 'contact' ? htmlspecialchars($s['message']) : '-'; ?></td>
+                            <td><?php echo $s['created_at']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
+
+
 
     </main>
 

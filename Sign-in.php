@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="account-buttons">
                 <?php if (isset($_SESSION['logged_in_user'])): ?>
-                    <span style="margin-right:10px;">Signed in as <strong><?php echo $_SESSION['logged_in_user']['username']; ?></strong></span>
+                    <span style="margin-right:10px;">Signed in as <strong><?php echo htmlspecialchars($_SESSION['logged_in_user']['username']); ?></strong></span>
                     <button class="btn btn-white" onclick="window.location.href='Logout.php'">Logout</button>
                 <?php else: ?>
                     <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container">
     <div class="signin-box">
         <h2>Sign In</h2>
-        <form method="POST" action="">
+        <form id="signin-form" method="POST" action="">
             <label>Email</label>
             <input type="email" name="email" placeholder="Enter your email" required>
             <label>Password</label>
@@ -129,5 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script src="./js/script.js"></script>
+<script src="./js/loginValidation.js"></script>
 </body>
 </html>

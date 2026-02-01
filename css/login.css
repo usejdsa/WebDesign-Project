@@ -1,9 +1,7 @@
-/* REMOVE LOGIN BUTTONS */
 .auth-header .account-buttons {
-    visibility:hidden
+    visibility: hidden;
 }
 
-/* SIGN IN PAGE */
 .container {
     width: 100%;
     height: calc(100vh - 100px);
@@ -51,7 +49,6 @@ input:focus {
     border-color: #c0392b;
 }
 
-/* SIGN-IN BUTTON */
 .signin-btn {
     width: 100%;
     padding: 12px;
@@ -70,7 +67,6 @@ input:focus {
     border: 1px solid #8C1F28;
 }
 
-/* SIGNUP LINK */
 .signup-text {
     margin-top: 15px;
     font-size: 14px;
@@ -85,19 +81,17 @@ input:focus {
     text-decoration: underline;
 }
 
-/* ACCOUNT RADIO BUTTONS */
-.role-btn-container{
+.role-btn-container {
     display: flex;
     gap: 12px; 
     margin: 10px 0 20px;
 }
 
-.role-btn{
+.role-btn {
     width: 100%;
 }
 
-/* REMEMBER ME CHECKBOX */
-.remember-checkbox{
+.remember-checkbox {
     padding-top: 15px;
     display: flex;
     align-items: center;
@@ -105,13 +99,13 @@ input:focus {
     margin-bottom: 12px;
 }
 
-.remember-checkbox input{
+.remember-checkbox input {
     width: auto;
     height: auto;
     margin: 0;
 }
 
-.remember-checkbox label{
+.remember-checkbox label {
     margin: 0;
     flex-shrink: 0;
 }

@@ -5,6 +5,47 @@ if(!isset($_SESSION['logged_in_user'])){
     header('Location: Sign-in.php');
     exit;
 }
+
+require_once './database/Database.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $first_name = trim($_POST['first_name'] ?? '');
+    $last_name = trim($_POST['last_name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $phone = trim($_POST['phone'] ?? '');
+    $subject = trim($_POST['subject'] ?? '');
+    $message = trim($_POST['message'] ?? '');
+
+    if (!$first_name || !$last_name || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$subject || !$message) {
+        echo "Please fill all required fields correctly.";
+        exit;
+    }
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    try {
+        $stmt = $conn->prepare("
+            INSERT INTO submissions (type, first_name, last_name, email, phone, subject, message)
+            VALUES ('contact', :first_name, :last_name, :email, :phone, :subject, :message)
+        ");
+        $stmt->execute([
+            ':first_name' => $first_name,
+            ':last_name' => $last_name,
+            ':email' => $email,
+            ':phone' => $phone,
+            ':subject' => $subject,
+            ':message' => $message
+        ]);
+        echo "Message sent successfully!";
+    } catch (PDOException $e) {
+        echo "Error sending message.";
+    }
+    exit;
+}
+?>
+?>
+
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +87,7 @@ if(!isset($_SESSION['logged_in_user'])){
 
             <div class="account-buttons">
                 <?php if (isset($_SESSION['logged_in_user'])): ?>
-                    <span style="margin-right:10px;">Signed in as <strong><?php echo $_SESSION['logged_in_user']['username']; ?></strong></span>
+                    <span style="margin-right:10px;">Signed in as <strong><?php echo htmlspecialchars($_SESSION['logged_in_user']['username']); ?></strong></span>
                     <button class="btn btn-white" onclick="window.location.href='Logout.php'">Logout</button>
                 <?php else: ?>
                     <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
@@ -91,63 +132,67 @@ if(!isset($_SESSION['logged_in_user'])){
                         <div class="contact-info-item">
                             <h4>Connect With Us</h4>
                             <div class="footer-links" style="gap: 8px;">
-                                <a href="#">Facebook</a>
-                                <a href="#">Twitter</a>
-                                <a href="#">Instagram</a>
-                                <a href="#">LinkedIn</a>
+                                <a href="www.facebook.com">Facebook</a>
+                                <a href="www.twitter.com">Twitter</a>
+                                <a href="www.instagram.com">Instagram</a>
+                                <a href="www.linkedIn.com">LinkedIn</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="contact-form">
-                        <form onsubmit="handleContactForm(event)">
+                        <form id="contactForm" method="POST">
+                            <input type="hidden" name="type" value="contact">
+                            
                             <div class="form-row">
                                 <div class="form-field">
                                     <label>First Name</label>
-                                    <input type="text" placeholder="John" required>
+                                    <input type="text" name="first_name" placeholder="John" required>
                                 </div>
                                 <div class="form-field">
                                     <label>Last Name</label>
-                                    <input type="text" placeholder="Doe" required>
+                                    <input type="text" name="last_name" placeholder="Doe" required>
                                 </div>
                             </div>
 
                             <div class="form-row full">
                                 <div class="form-field">
                                     <label>Email Address</label>
-                                    <input type="email" placeholder="john@example.com" required>
+                                    <input type="email" name="email" placeholder="john@example.com" required>
                                 </div>
                             </div>
 
                             <div class="form-row full">
                                 <div class="form-field">
                                     <label>Phone Number</label>
-                                    <input type="tel" placeholder="+1 (555) 000-0000">
+                                    <input type="tel" name="phone" placeholder="+1 (555) 000-0000">
                                 </div>
                             </div>
 
                             <div class="form-row full">
                                 <div class="form-field">
                                     <label>Subject</label>
-                                    <input type="text" placeholder="How can we help?" required>
+                                    <input type="text" name="subject" placeholder="How can we help?" required>
                                 </div>
                             </div>
 
                             <div class="form-row full">
                                 <div class="form-field">
                                     <label>Message</label>
-                                    <textarea placeholder="Please share your message here..." required></textarea>
+                                    <textarea name="message" placeholder="Please share your message here..." required></textarea>
                                 </div>
                             </div>
 
                             <div class="form-row full">
                                 <div class="form-field">
                                     <button type="submit" class="btn btn-red"
-                                        style="background-color: #5F141A; color: white; padding: 12px 32px; border: none; cursor: pointer; border-radius: 4px; font-weight: 600; width: 100%;">Send
-                                        Message</button>
+                                        style="background-color: #5F141A; color: white; padding: 12px 32px; border: none; cursor: pointer; border-radius: 4px; font-weight: 600; width: 100%;">
+                                        Send Message
+                                    </button>
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -205,12 +250,25 @@ if(!isset($_SESSION['logged_in_user'])){
     </footer>
 
     <script>
-        function handleContactForm(event) {
-            event.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            event.target.reset();
-        }
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('submitForm.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.text())
+            .then(msg => {
+                alert(msg);
+                this.reset();
+            })
+            .catch(() => alert('Something went wrong'));
+        });
     </script>
+
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

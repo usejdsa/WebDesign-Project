@@ -47,7 +47,7 @@ if(!isset($_SESSION['logged_in_user'])){
 
             <div class="account-buttons">
                 <?php if (isset($_SESSION['logged_in_user'])): ?>
-                    <span style="margin-right:10px;">Signed in as <strong><?php echo $_SESSION['logged_in_user']['username']; ?></strong></span>
+                    <span style="margin-right:10px;">Signed in as <strong><?php echo htmlspecialchars($_SESSION['logged_in_user']['username']); ?></strong></span>
                     <button class="btn btn-white" onclick="window.location.href='Logout.php'">Logout</button>
                 <?php else: ?>
                     <button class="btn btn-white" onclick="window.location.href='Sign-in.php'">Sign In</button>
@@ -194,7 +194,7 @@ if(!isset($_SESSION['logged_in_user'])){
         </div>
     </footer>
 
-    <script src="../js/shared.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

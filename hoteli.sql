@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2026 at 11:53 PM
+-- Generation Time: Feb 01, 2026 at 08:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,7 +46,10 @@ INSERT INTO `bookings` (`id`, `room_id`, `customer_name`, `customer_email`, `nig
 (4, 1, 'user', 'user@gmail.com', 5, 6, '2026-10-10', '2026-01-31 22:35:41'),
 (5, 2, 'user', 'user@gmail.com', 5, 5, '2026-12-01', '2026-01-31 22:45:49'),
 (6, 3, 'user', 'user@gmail.com', 3, 3, '2026-12-02', '2026-01-31 22:46:32'),
-(7, 2, 'user', 'user@gmail.com', 5, 1, '2026-12-02', '2026-01-31 22:48:13');
+(7, 2, 'user', 'user@gmail.com', 5, 1, '2026-12-02', '2026-01-31 22:48:13'),
+(8, 5, 'ddd', 'test@test.com', 67, 4, '5666-02-06', '2026-02-01 18:14:38'),
+(9, 4, 'ddd', 'admin@test.com', 12, 3, '2026-02-17', '2026-02-01 18:16:59'),
+(10, 1, 'usejd', 'usejd@test.com', 33, 3, '2026-02-26', '2026-02-01 18:53:08');
 
 -- --------------------------------------------------------
 
@@ -70,13 +73,40 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `name`, `description`, `price_per_night`, `image`, `is_featured`, `status`, `created_at`) VALUES
-(1, 'Deluxe Room', 'Spacious room with city view', 120.00, 'room-deluxe.jpeg', 1, 'available', '2026-01-30 15:35:02'),
-(2, 'Economy Room', 'Affordable and cozy room', 70.00, 'room-economy.jpg', 1, 'unavailable', '2026-01-30 15:35:02'),
+(1, 'Deluxe Room', 'Spacious room with city view', 120.00, 'room-deluxe.jpeg', 1, 'unavailable', '2026-01-30 15:35:02'),
+(2, 'Economy Room', 'Affordable and cozy room', 70.00, 'room-economy.jpg', 1, 'available', '2026-01-30 15:35:02'),
 (3, 'Ocean View Room', 'Room with stunning ocean view', 150.00, 'room-oceanView.jpg', 1, 'available', '2026-01-30 15:35:02'),
 (4, 'Superior Room', 'Larger room with premium amenities', 130.00, 'room-superior.jpg', 1, 'available', '2026-01-30 15:35:02'),
 (5, 'Family Suite', 'Spacious suite perfect for family', 180.00, 'suite-family.jpg', 1, 'available', '2026-01-30 15:35:02'),
-(6, 'Junior Suite', 'Comfortable suite for two', 200.00, 'suite-junior.jpg', 1, 'available', '2026-01-30 15:35:02'),
-(8, 'bestsuite', 'best room ever', 50.00, '1769790551_foto.jpg', 1, 'available', '2026-01-30 16:29:11');
+(6, 'Junior Suite', 'Comfortable suite for three', 200.00, 'suite-junior.jpg', 1, 'available', '2026-01-30 15:35:02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `submissions`
+--
+
+CREATE TABLE `submissions` (
+  `id` int(11) NOT NULL,
+  `type` enum('newsletter','contact') NOT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `submissions`
+--
+
+INSERT INTO `submissions` (`id`, `type`, `first_name`, `last_name`, `email`, `phone`, `subject`, `message`, `created_at`) VALUES
+(1, 'newsletter', NULL, NULL, 'delira@dkaodj.npn', NULL, NULL, NULL, '2026-02-01 16:48:22'),
+(2, 'contact', 'amar', 'amari', 'amar@amari.com', '9029020202', 'amar', 'amari', '2026-02-01 16:56:33'),
+(3, 'newsletter', NULL, NULL, 'admin@test.com', NULL, NULL, NULL, '2026-02-01 18:13:18'),
+(4, 'contact', 'delira', 'dijar', 'usejd@test.com', '9029020202', 'yes', 'xdsfc swfvrw', '2026-02-01 18:18:05');
 
 -- --------------------------------------------------------
 
@@ -103,7 +133,8 @@ INSERT INTO `user` (`id`, `role`, `username`, `email`, `password`) VALUES
 (4, 'user', 'arti', 'arti@gmail.com', '$2y$10$VXD/n9K/Ut0aoJa.tvwa/.KFdLA3QGo1TabN0M5rBgp4dM4FqVCc2'),
 (5, 'user', 'shpat', 'shpat@gmail.com', '$2y$10$RAJayJG1ZLgvnoxqMOK5DeCWfhDGPEtbw6h7/jGS2sjw3h0jJ6eYu'),
 (6, 'admin', 'albion', 'albion@gmail.com', '$2y$10$Ije062aliqtpbv9Ud22WzumpV4kwvhLE3h7iRIFpFHIJZRvFlbCzS'),
-(7, 'user', 'user', 'user@gmail.com', '$2y$10$qo/10OYrvBqhA2xQEagZHuTnwYNOtslSt1Ra2FxkwBmC2BhE2a40G');
+(7, 'user', 'user', 'user@gmail.com', '$2y$10$qo/10OYrvBqhA2xQEagZHuTnwYNOtslSt1Ra2FxkwBmC2BhE2a40G'),
+(8, 'user', 'testuser', 'admin@test.com', '$2y$10$ugQ0luXJAAdL9AbSuLKRQupj6pI7shKQ9M5vqqR6K4NRaYq.83rA2');
 
 --
 -- Indexes for dumped tables
@@ -123,6 +154,12 @@ ALTER TABLE `rooms`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `submissions`
+--
+ALTER TABLE `submissions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -136,7 +173,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -145,10 +182,16 @@ ALTER TABLE `rooms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `submissions`
+--
+ALTER TABLE `submissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
